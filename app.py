@@ -1,5 +1,6 @@
-import requests
 import re
+
+import requests
 from bs4 import BeautifulSoup
 
 with open("lista.txt", "r") as arquivo:
@@ -11,7 +12,7 @@ lista_dif = []
 imobiliarias = [
     {
         'nome': 'DIFERENCIAL',
-        'url':'https://diferencialimoveis.com/consultar?para=locacao&refs=&empreendimento=&tipo=Casa%2CCasa+Fundos%2CCobertura&dorm=&_dorm=&cidade_bairros=&valor=&_valor=&caracteristicas=',   
+        'url':'https://diferencialimoveis.com/consultar?empreendimento=&tipo=Casa%2CCasa%20Fundos%2CCobertura&para=locacao&refs=&_dorm=&cidade_bairros=&_valor=&caracteristicas=&valor=&dorm=&page=1',
         'find1': 'div',
         'find2': 'class',
         'find3': 'item-imovel-result-content',
@@ -237,7 +238,7 @@ for imobiliaria in imobiliarias:
 
     for produto in produtos:
         #allex/seta/vale
-        codigo = ''    
+        codigo = ''
         if imobiliaria['Pfind1'] == '' and imobiliaria['Cfind'] != '':
             #certa/jfCorretor/catedral
             codigo = produto[imobiliaria['Cfind']]
@@ -279,7 +280,7 @@ if len(lista_dif) == 0:
     print('Não foi encontrado nenhum resultado diferente!')
 else:
     for l in lista_dif:
-        print(l)   
+        print(l)
 
     salvar = input('Deseja atualizar a lista? S sim - N não: ')
     if salvar == 's':
